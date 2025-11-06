@@ -107,6 +107,30 @@ export type Database = {
         }
         Relationships: []
       }
+      favorites: {
+        Row: {
+          created_at: string | null
+          id: string
+          item_id: string
+          item_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          item_id: string
+          item_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          item_id?: string
+          item_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       itineraries: {
         Row: {
           created_at: string
@@ -148,6 +172,7 @@ export type Database = {
           full_name: string | null
           id: string
           onboarding_answers: Json | null
+          onboarding_complete: boolean | null
           updated_at: string
           user_preferences: Json | null
         }
@@ -158,6 +183,7 @@ export type Database = {
           full_name?: string | null
           id: string
           onboarding_answers?: Json | null
+          onboarding_complete?: boolean | null
           updated_at?: string
           user_preferences?: Json | null
         }
@@ -168,6 +194,7 @@ export type Database = {
           full_name?: string | null
           id?: string
           onboarding_answers?: Json | null
+          onboarding_complete?: boolean | null
           updated_at?: string
           user_preferences?: Json | null
         }
@@ -240,6 +267,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      temp_otps: {
+        Row: {
+          contact: string
+          created_at: string | null
+          id: string
+          otp_code: string
+          verified: boolean | null
+        }
+        Insert: {
+          contact: string
+          created_at?: string | null
+          id?: string
+          otp_code: string
+          verified?: boolean | null
+        }
+        Update: {
+          contact?: string
+          created_at?: string | null
+          id?: string
+          otp_code?: string
+          verified?: boolean | null
+        }
+        Relationships: []
       }
       tourist_spots: {
         Row: {
