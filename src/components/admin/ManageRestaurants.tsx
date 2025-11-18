@@ -1,3 +1,4 @@
+import { Portal } from "@radix-ui/react-portal";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -330,30 +331,34 @@ const ManageRestaurants = () => {
               </div>
 
               {/* Barangay (Location) Dropdown */}
-              <div>
-                <Label>Location (Barangay) *</Label>
-                <Select
-                  onValueChange={(code) => {
-                    const barangay = barangays.find((b) => b.code === code);
-                    setFormData((prev) => ({ ...prev, location: barangay?.name || "" }));
-                  }}
-                  value={barangays.find((b) => b.name === formData.location)?.code || ""}
-                  disabled={!barangays.length}
-                >
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={barangays.length ? "Select a barangay" : "Select municipality first"}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {barangays.map((b) => (
-                      <SelectItem key={b.code} value={b.code}>
-                        {b.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+<div>
+  <Label>Location (Barangay) *</Label>
+  <Select
+    onValueChange={(code) => {
+      const barangay = barangays.find((b) => b.code === code);
+      setFormData((prev) => ({ ...prev, location: barangay?.name || "" }));
+    }}
+    value={barangays.find((b) => b.name === formData.location)?.code || ""}
+    disabled={!barangays.length}
+  >
+    <SelectTrigger>
+      <SelectValue
+        placeholder={barangays.length ? "Select a barangay" : "Select municipality first"}
+      />
+    </SelectTrigger>
+    {/* 👇 Fix: wrapped in Portal and forced bottom */}
+    <Portal>
+      <SelectContent side="bottom" position="popper">
+        {barangays.map((b) => (
+          <SelectItem key={b.code} value={b.code}>
+            {b.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Portal>
+  </Select>
+</div>
+
 
               {/* Description */}
               <div>

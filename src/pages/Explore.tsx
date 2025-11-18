@@ -165,11 +165,13 @@ const Explore = () => {
                   >
                     {spot.image_url && (
                       <div className="h-48 overflow-hidden bg-muted">
-                        <img
-                          src={spot.image_url}
-                          alt={spot.name}
-                          className="w-full h-full object-cover"
+                        {spot.image_url && 
+                          <img
+                            src={spot.image_url}
+                            alt={spot.name}
+                            className="w-full h-full object-cover"
                         />
+                        }
                       </div>
                     )}
                     <CardHeader>
